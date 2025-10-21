@@ -1,0 +1,18 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-CU20-ubuntu-18.04
+    container_name: mssql-2019
+    restart: unless-stopped
+    user: root
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "ur-super-secret-pass" #change this !!!
+      TZ: "Asia/Jakarta"
+    volumes:
+      - ./data:/var/opt/mssql/data
+    ports:
+      - 1434:1433
+networks:
+  default:
+    external: true
+    name: nser-docker

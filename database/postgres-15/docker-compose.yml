@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-15
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: "ur-super-secret-pass"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "init_db"
+      TZ: "Asia/Jakarta"
+    ports:
+      - 15432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+networks:
+  default:
+    external: true
+    name: nser-docker

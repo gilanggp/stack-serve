@@ -1,0 +1,21 @@
+services:
+  mysql:
+    container_name: mysql-8.4
+    image: mysql:8.4-oraclelinux8
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=Asia/Jakarta
+      - --max_allowed_packet=64M
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/database-mysql-8-4-root-password
+    ports:
+      - 23306:3306
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./.root_passwd:/database-mysql-8-4-root-password:ro
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: nser-docker

@@ -1,0 +1,22 @@
+services:
+  mysql:
+    container_name: mysql-8.0
+    image: mysql:8.0
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=Asia/Jakarta
+      - --max_allowed_packet=64M
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/database-mysql-8-0-root-password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./.root-passwd:/database-mysql-8-0-root-password:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nser-docker

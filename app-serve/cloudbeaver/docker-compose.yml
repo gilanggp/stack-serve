@@ -1,0 +1,15 @@
+services:
+  cloudbeaver:
+    image: dbeaver/cloudbeaver
+    container_name: cloudbeaver
+    volumes:
+      - ./workspace:/opt/cloudbeaver/workspace
+    restart: unless-stopped
+    ports:
+      - 8978:8978
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+networks:
+  default:
+    external: true
+    name: nser-docker

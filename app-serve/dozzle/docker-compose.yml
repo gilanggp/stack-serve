@@ -1,0 +1,22 @@
+services:
+  monitor:
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.users.yaml:/data/users.yaml:ro
+    ports:
+      - 23390:8080
+    environment:
+      - DOZZLE_ENABLE_SHELL=true
+      - DOZZLE_AUTH_PROVIDER=simple
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints: [node.hostname == <ur-hostname>] # get this value using 'hostname' command
+      restart_policy:
+        condition: on-failure
+
+networks:
+  default:
+    external: true
+    name: nser-docker

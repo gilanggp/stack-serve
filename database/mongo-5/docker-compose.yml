@@ -1,0 +1,16 @@
+services:
+  mongo:
+    container_name: mongo-5
+    image: mongo:5
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"  #change this !!!
+      MONGO_INITDB_ROOT_PASSWORD: "root"  #change this !!!
+    ports:
+      - 7017:27017
+    volumes:
+      - ./data:/data/db
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: nser-docker
